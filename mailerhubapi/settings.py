@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q@++=-oec2+%+7l&4x#^d9v8u^1yj3q35g0(%%om_q3qk==gj&'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-q@++=-oec2+%+7l&4x#^d9v8u^1yj3q35g0(%%om_q3qk==gj&')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', True)
 
 ALLOWED_HOSTS = []
 
@@ -80,11 +81,11 @@ WSGI_APPLICATION = 'mailerhubapi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mailerhub',
-        'USER': 'root',
-        'PASSWORD': 'admin666',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'NAME': os.getenv('DB_NAME','mailerhub'),
+        'USER': os.getenv('DB_USER','root'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'admin666'),
+        'HOST': os.getenv('DB_HOST','127.0.0.1'),
+        'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 
