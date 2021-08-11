@@ -91,6 +91,7 @@ if DEBUG:
         }
     }
 else:
+    DATABASES = {}
     DATABASES['default'] = dj_database_url.config(default=os.getenv('CLEARDB_DATABASE_URL', ''))
 
 # Password validation
