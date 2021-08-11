@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -78,17 +79,19 @@ WSGI_APPLICATION = 'mailerhubapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME','mailerhub'),
-        'USER': os.getenv('DB_USER','root'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'admin666'),
-        'HOST': os.getenv('DB_HOST','127.0.0.1'),
-        'PORT': os.getenv('DB_PORT', '3306'),
+if debug:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.getenv('DB_NAME','mailerhub'),
+            'USER': os.getenv('DB_USER','root'),
+            'PASSWORD': os.getenv('DB_PASSWORD', 'admin666'),
+            'HOST': os.getenv('DB_HOST','127.0.0.1'),
+            'PORT': os.getenv('DB_PORT', '3306'),
+        }
     }
-}
-
+else:
+    DATABASES['default'] = dj_database_url.config(default=os.getenv('CLEARDB_DATABASE_URL', ''))
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
