@@ -44,3 +44,6 @@ class MailConf(models.Model):
             new_list.append(copy.value)
 
         return new_list
+
+    def valid_host(self, host):
+        return len(self.allowed_hosts.filter(value=host) ) > 0

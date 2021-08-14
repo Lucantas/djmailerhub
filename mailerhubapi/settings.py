@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-q@++=-oec2+%+7l&4x#^d9v8u^1yj3q35g0(%%om_q3qk==gj&')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', '').lower() == 'true'
+DEBUG = os.getenv('DEBUG', '').lower() != 'false'
 
-ALLOWED_HOSTS = ["mailerhubapi.herokuapp.com"]
+ALLOWED_HOSTS = ["localhost", "mailerhubapi.herokuapp.com"]
 
 
 # Application definition
